@@ -1,32 +1,30 @@
 import React, { Component } from 'react';
+import axios from 'axios';
+
 
 class CardPanel extends Component {
+  state = {
+    persons: []
+  }
+  componentWillMount() {
+    axios.get(`http://10.74.19.207:9004/careers/currentOpenings`)
+      .then(res => {
+        console.log(res+"tesxt");
+        const persons = res.data;
+        this.setState({ persons });
+      })
+  }
     render() {
-      const numbers = [{designation: "Analyst",Experience: "2-4",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Specialist",Experience: "4-6",location :"Hyderabad","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Tech Lead",Experience: "6+",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Tech Arch",Experience: "10+",location :"Bengaluru","skills":"Mangerial skiils,React",postedDate:"06/24/2018"},
-                        {designation: "Analyst",Experience: "2-4",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Specialist",Experience: "4-6",location :"Hyderabad","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Tech Lead",Experience: "6+",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Tech Arch",Experience: "10+",location :"Bengaluru","skills":"Mangerial skiils,React",postedDate:"06/24/2018"},
-                        {designation: "Specialist",Experience: "4-6",location :"Hyderabad","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Tech Lead",Experience: "6+",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Tech Arch",Experience: "10+",location :"Bengaluru","skills":"Mangerial skiils,React",postedDate:"06/24/2018"},
-                        {designation: "Analyst",Experience: "2-4",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Specialist",Experience: "4-6",location :"Hyderabad","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Tech Lead",Experience: "6+",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Tech Arch",Experience: "10+",location :"Bengaluru","skills":"Mangerial skiils,React",postedDate:"06/24/2018"}
-                        
-                      ];
+      console.log(this.state);
+      const numbers = this.state;
     var arr = [];
     Object.keys(numbers).forEach(function(key) {
       arr.push(numbers[key]);
     });                 
     return (
-      <div className="container margin-top-xl jobsearchBox">
+      <div className="container-fluid margin-top-xl jobsearchBox">
       <div className="row">
-      {arr.map(item => <MyAppChild designation={item.designation} Experience={item.Experience} location={item.location} skills={item.skills}  postedDate={item.postedDate}/>)}
+      {arr.map(item => <MyAppChild designation={item.designation} Experience={item.Experience} location={item.job_location} skills={item.technologies}  postedDate={item.posting_date}/>)}
       </div>
       </div>);
     }
@@ -35,7 +33,7 @@ class CardPanel extends Component {
 class MyAppChild extends React.Component {
   render() {
     return (
-      <div className="col-md-3">
+      <div className="col-md-2">
             <div class="panel panel-default panel-info">
               <div class="panel-heading">
                 <h3 class="panel-title"><b>{this.props.designation}</b></h3>

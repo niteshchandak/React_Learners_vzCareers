@@ -5,7 +5,20 @@ class CardPanel extends Component {
       const numbers = [{designation: "Analyst",Experience: "2-4",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
                         {designation: "Specialist",Experience: "4-6",location :"Hyderabad","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
                         {designation: "Tech Lead",Experience: "6+",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
-                        {designation: "Tech Arch",Experience: "10+",location :"Bengaluru","skills":"Mangerial skiils,React",postedDate:"06/24/2018"}];
+                        {designation: "Tech Arch",Experience: "10+",location :"Bengaluru","skills":"Mangerial skiils,React",postedDate:"06/24/2018"},
+                        {designation: "Analyst",Experience: "2-4",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
+                        {designation: "Specialist",Experience: "4-6",location :"Hyderabad","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
+                        {designation: "Tech Lead",Experience: "6+",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
+                        {designation: "Tech Arch",Experience: "10+",location :"Bengaluru","skills":"Mangerial skiils,React",postedDate:"06/24/2018"},
+                        {designation: "Specialist",Experience: "4-6",location :"Hyderabad","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
+                        {designation: "Tech Lead",Experience: "6+",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
+                        {designation: "Tech Arch",Experience: "10+",location :"Bengaluru","skills":"Mangerial skiils,React",postedDate:"06/24/2018"},
+                        {designation: "Analyst",Experience: "2-4",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
+                        {designation: "Specialist",Experience: "4-6",location :"Hyderabad","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
+                        {designation: "Tech Lead",Experience: "6+",location :"Chennai","skills":"HTML5,css3,React",postedDate:"06/24/2018"},
+                        {designation: "Tech Arch",Experience: "10+",location :"Bengaluru","skills":"Mangerial skiils,React",postedDate:"06/24/2018"}
+                        
+                      ];
     var arr = [];
     Object.keys(numbers).forEach(function(key) {
       arr.push(numbers[key]);

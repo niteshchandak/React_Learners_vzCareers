@@ -1,5 +1,7 @@
 import React from 'react';
 import {  BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Header from '../components/header';
+import Banner from '../components/banner';
 import axios from 'axios';
 import RegisterPage from '../RegisterPage/RegisterPage';
 //import { connect } from 'react-redux';
@@ -16,21 +18,22 @@ class LoginPage extends React.Component {
         this.state = {
             username: '',
             password: '',
-            submitted: false
+            submitted: false,
+            data:[{}]
         };
 
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    componentDidMount() {
-        axios.get(`https://jsonplaceholder.typicode.com/users`)
+   /* componentDidMount() {
+        axios.get(`http://10.74.19.207:9004/careers/validateuser/{}`)
           .then(res => {
             console.log(res+"tesxt");
             const persons = res.data;
             this.setState({ persons });
           })
-      }
+      }*/
 
     handleChange(e) {
         const { name, value } = e.target;
@@ -50,10 +53,12 @@ class LoginPage extends React.Component {
                 if (username && password) {
                     console.log(userdetails);
                     console.log(password);
-            axios.post(`https://jsonplaceholder.typicode.com/users`, { userdetails })
+            axios.post(`http://10.74.19.207:9004/careers/validateuser/${username}`, {})
             .then(res => {
                 console.log(res);
                 console.log(res.data);
+                this.setState(res);
+                console.log(this.state);
       })
         }
     }
@@ -61,7 +66,12 @@ class LoginPage extends React.Component {
     render() {
         const { loggingIn } = this.props;
         const { username, password, submitted } = this.state;
+        console.log("here"+this.state.data[0]?this.state.data[0].fistname:"");
         return (
+            
+            <div>
+            <Header username={this.state.data[0]?this.state.data[0].fistname:""}/>
+            <Banner />
             <div className="col-md-6 col-md-offset-3">
                 <h2>Login</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
@@ -91,6 +101,7 @@ class LoginPage extends React.Component {
                     <Link to="/register" className="btn btn-link">Register</Link>
                     </div>
                 </form>
+            </div>
             </div>
         );
     }

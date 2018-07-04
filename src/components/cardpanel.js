@@ -1,56 +1,187 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
 
 class CardPanel extends Component {
+
   state = {
-    persons: []
+    indexOpen: -1,
+    isLastindex:false,
+    data: [{ designation: "Analyst", Experience: "2-4", location: "Chennai", "skills": "HTML5,css3,React", postedDate: "06/24/2018" },
+    { designation: "Specialist", Experience: "4-6", location: "Hyderabad", "skills": "HTML5,css3,React", postedDate: "06/24/2018" },
+    { designation: "Tech Lead", Experience: "6+", location: "Chennai", "skills": "HTML5,css3,React", postedDate: "06/24/2018" },
+    { designation: "Tech Arch", Experience: "10+", location: "Bengaluru", "skills": "Mangerial skiils,React", postedDate: "06/24/2018" },
+    {},
+    { designation: "Tech Arch", Experience: "12+", location: "Bengaluru", "skills": "Mangerial skiils,React", postedDate: "06/24/2018" }]
+
   }
-  componentWillMount() {
-    axios.get(`http://10.74.19.207:9004/careers/currentOpenings`)
-      .then(res => {
-        console.log(res+"tesxt");
-        const persons = res.data;
-        this.setState({ persons });
-      })
-  }
-    render() {
-      console.log(this.state);
-      const numbers = this.state;
-    var arr = [];
-    Object.keys(numbers).forEach(function(key) {
-      arr.push(numbers[key]);
-    });                 
-    return (
-      <div className="container-fluid margin-top-xl jobsearchBox">
-      <div className="row">
-      {arr.map(item => <MyAppChild designation={item.designation} Experience={item.Experience} location={item.job_location} skills={item.technologies}  postedDate={item.posting_date}/>)}
-      </div>
-      </div>);
+
+  setIndexOpen = (indexOpen) => {
+    let isLastindex = false;
+    while (indexOpen == 0 || indexOpen % 4 != 0 && !isLastindex) {
+      if (indexOpen + 1 >= this.state.data.length) {
+        isLastindex = true;
+      }
+      indexOpen++;
     }
+    if (isLastindex){
+      this.setState({ isLastindex: true,indexOpen:-1 })
+    return;}
+    this.setState({ indexOpen: indexOpen,isLastindex:false });
+    
+  }
+  render() {
+    var arr = [];
+    Object.keys(this.state.data).forEach(function (key) {
+      arr.push(this.state.data[key]);
+    }.bind(this));
+
+    return (
+      <div className="container margin-top-xl jobsearchBox">
+        <div className="row">
+          {arr.map(function (item, i) {
+            if (i == 0 || i % 4 != 0)
+              return <MyAppChild designation={item.designation} Experience={item.Experience} index={i}
+                location={item.location} setIndexOpen={this.setIndexOpen} skills={item.skills} postedDate={item.postedDate} />;
+
+            else {
+              let hideclassName = "";
+              if (this.state.indexOpen === i) {
+                 return <div className={"col-md-12 " + hideclassName}>
+                    <div className="panel panel-default panelDetail">
+                        <div className="panel-body">
+                        <h3><b> What we’re looking for...</b></h3>
+
+<b>Education :</b> B.E/B.Tech/M.C.A /M.Sc - Comp Science.
+<b>Experience : 2.5+ Yrs</b> Candidate must have experience in developing Java and J2EE applications. Experience as a developer with knowledge on below skillset <b> Primary skills -</b> NodeJS, ReactJS, Redux, Full Stack Developer, Oracle PL/SQL 
+<b> Secondary skills –</b> Unix, Junit, Weblogic/JBoss, DevOps Tool Chain Exposure to DevOps and Agile will be preferable.
+Experience working with Linux OS (Red hat / Ubuntu ) is preferred.
+<p className="applyJob"><button type="submit" class="btn btn-primary">Apply Job</button></p>
+
+    <div className="row bs-wizard">
+        
+        <div className="col-xs-3 bs-wizard-step active">
+          <div className="text-center bs-wizard-stepnum">Step 1</div>
+          <div className="progress"><div className="progress-bar"></div></div>
+          <span  className="bs-wizard-dot"></span>
+          <div className="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div>
+        </div>
+        
+        <div className="col-xs-3 bs-wizard-step disabled">
+          <div className="text-center bs-wizard-stepnum">Step 2</div>
+          <div className="progress"><div className="progress-bar"></div></div>
+          <span className="bs-wizard-dot"></span>
+          <div className="bs-wizard-info text-center">Nam mollis tristique erat vel tristique. Aliquam erat volutpat. Mauris et vestibulum nisi. Duis molestie nisl sed scelerisque vestibulum. Nam placerat tristique placerat</div>
+        </div>
+        
+        <div className="col-xs-3 bs-wizard-step disabled">
+          <div className="text-center bs-wizard-stepnum">Step 3</div>
+          <div className="progress"><div className="progress-bar"></div></div>
+          <span className="bs-wizard-dot"></span>
+          <div className="bs-wizard-info text-center">Integer semper dolor ac auctor rutrum. Duis porta ipsum vitae mi bibendum bibendum</div>
+        </div>
+        
+        <div className="col-xs-3 bs-wizard-step disabled">
+          <div className="text-center bs-wizard-stepnum">Step 4</div>
+          <div className="progress"><div className="progress-bar"></div></div>
+          <span className="bs-wizard-dot"></span>
+          <div className="bs-wizard-info text-center"> Curabitur mollis magna at blandit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</div>
+        </div>
+    </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+                 </div>
+              }else{
+                return null;
+              }
+
+            }
+          }.bind(this)
+          )}
+{this.state.isLastindex?<div className={"col-md-12 "}>
+                   <div className="panel panel-default panelDetail">
+                        <div className="panel-body">
+                        <h3><b> What we’re looking for...</b></h3>
+
+<b>Education :</b> B.E/B.Tech/M.C.A /M.Sc - Comp Science.
+<b>Experience : 2.5+ Yrs</b> Candidate must have experience in developing Java and J2EE applications. Experience as a developer with knowledge on below skillset <b> Primary skills -</b> NodeJS, ReactJS, Redux, Full Stack Developer, Oracle PL/SQL 
+<b> Secondary skills –</b> Unix, Junit, Weblogic/JBoss, DevOps Tool Chain Exposure to DevOps and Agile will be preferable.
+Experience working with Linux OS (Red hat / Ubuntu ) is preferred.
+<p className="applyJob"><button type="submit" class="btn btn-primary">Apply Job</button></p>
+
+    <div className="row bs-wizard">
+        
+        <div className="col-xs-3 bs-wizard-step active">
+          <div className="text-center bs-wizard-stepnum">Step 1</div>
+          <div className="progress"><div className="progress-bar"></div></div>
+          <span  className="bs-wizard-dot"></span>
+          <div className="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div>
+        </div>
+        
+        <div className="col-xs-3 bs-wizard-step disabled">
+          <div className="text-center bs-wizard-stepnum">Step 2</div>
+          <div className="progress"><div className="progress-bar"></div></div>
+          <span className="bs-wizard-dot"></span>
+          <div className="bs-wizard-info text-center">Nam mollis tristique erat vel tristique. Aliquam erat volutpat. Mauris et vestibulum nisi. Duis molestie nisl sed scelerisque vestibulum. Nam placerat tristique placerat</div>
+        </div>
+        
+        <div className="col-xs-3 bs-wizard-step disabled">
+          <div className="text-center bs-wizard-stepnum">Step 3</div>
+          <div className="progress"><div className="progress-bar"></div></div>
+          <span className="bs-wizard-dot"></span>
+          <div className="bs-wizard-info text-center">Integer semper dolor ac auctor rutrum. Duis porta ipsum vitae mi bibendum bibendum</div>
+        </div>
+        
+        <div className="col-xs-3 bs-wizard-step disabled">
+          <div className="text-center bs-wizard-stepnum">Step 4</div>
+          <div className="progress"><div className="progress-bar"></div></div>
+          <span className="bs-wizard-dot"></span>
+          <div className="bs-wizard-info text-center"> Curabitur mollis magna at blandit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</div>
+        </div>
+    </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+
+</div>:""}
+        </div>
+      </div>);
+  }
 }
 
 class MyAppChild extends React.Component {
   render() {
     return (
-      <div className="col-md-2">
-            <div class="panel panel-default panel-info">
-              <div class="panel-heading">
-                <h3 class="panel-title"><b>{this.props.designation}</b></h3>
-              </div>
-              <div class="panel-body">
-                <p><b>Verizon Data Service</b></p>
-                <ul>
-                  <li><span class="glyphicon glyphicon-briefcase"></span> {this.props.Experience}</li>
-                  <li><span class="glyphicon glyphicon-pushpin"></span> {this.props.location}</li>
-                </ul>
-                <p>Key Skills: <i>{this.props.skills}</i></p>
-              </div>
-              <div class="panel-footer">
-              <span>Posted: {this.props.postedDate} </span>
-              </div>
-            </div>
+      <div className="col-md-3" onClick={() => { this.props.setIndexOpen(this.props.index) }}>
+        <div class="panel panel-default panel-info panelPage">
+          <div class="panel-heading">
+            <h3 class="panel-title"><b>{this.props.designation}</b></h3>
           </div>
+          <div class="panel-body">
+            <p><b>Verizon Data Service</b></p>
+            <ul>
+              <li><span class="glyphicon glyphicon-briefcase"></span> {this.props.Experience}</li>
+              <li><span class="glyphicon glyphicon-pushpin"></span> {this.props.location}</li>
+            </ul>
+            <p>Key Skills: <i>{this.props.skills}</i></p>
+          </div>
+          <div class="panel-footer">
+            <span>Posted: {this.props.postedDate} </span>
+          </div>
+        </div>
+        <div className="arrowDown" ></div>
+
+      </div>
+
     );
   }
 }

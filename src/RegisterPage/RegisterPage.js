@@ -9,12 +9,13 @@ class RegisterPage extends React.Component {
 
         this.state = {
             user: {
-                firstName: '',
-                lastName: '',
+                fistname: '',
+                lastname: '',
+                dateofbirth:'',
                 emailid: '',
-                mobileno:'',
+                mobilenumber:'',
                 password: '',
-                resume:''
+                uploadresume:''
 
             },
             submitted: false
@@ -41,9 +42,16 @@ class RegisterPage extends React.Component {
         this.setState({ submitted: true });
         const { user } = this.state;
         //const { dispatch } = this.props;
-        if (user.firstName && user.lastName && user.emailid && user.password && user.mobileno && user.resume) {
+        if (user.fistname && user.lastname && user.dateofbirth && user.emailid && user.password && user.mobilenumber&& user.uploadresume) {
             console.log(user);
-            axios.post(`https://jsonplaceholder.typicode.com/users`, { user })
+            var firstn= user.fistname;
+            var lastn = user.lastname;
+            var dateof = user.dateofbirth;
+            var emailid = user.emailid;
+            var password= user.password;
+            var mobileno= user.mobilenumber;
+            var uploadr=user.uploadresume;
+            axios.post(`http://10.74.19.207:9004/careers/adduser`, {firstn,lastn,dateof,emailid,password, mobileno,uploadr})
             .then(res => {
                 console.log(res);
                 console.log(res.data);
@@ -57,18 +65,25 @@ class RegisterPage extends React.Component {
             <div className="col-md-6 col-md-offset-3">
                 <h2>Register</h2>
                 <form name="form" onSubmit={this.handleSubmit}>
-                    <div className={'form-group' + (submitted && !user.firstName ? ' has-error' : '')}>
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" className="form-control" name="firstName" value={user.firstName} onChange={this.handleChange} />
-                        {submitted && !user.firstName &&
+                    <div className={'form-group' + (submitted && !user.fistname ? ' has-error' : '')}>
+                        <label htmlFor="fistname">First Name</label>
+                        <input type="text" className="form-control" name="fistname" value={user.fistname} onChange={this.handleChange} />
+                        {submitted && !user.fistname &&
                             <div className="help-block">First Name is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.lastName ? ' has-error' : '')}>
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" className="form-control" name="lastName" value={user.lastName} onChange={this.handleChange} />
-                        {submitted && !user.lastName &&
+                    <div className={'form-group' + (submitted && !user.lastname ? ' has-error' : '')}>
+                        <label htmlFor="lastname">Last Name</label>
+                        <input type="text" className="form-control" name="lastname" value={user.lastname} onChange={this.handleChange} />
+                        {submitted && !user.lastname &&
                             <div className="help-block">Last Name is required</div>
+                        }
+                    </div>
+                    <div className={'form-group' + (submitted && !user.dateofbirth ? ' has-error' : '')}>
+                        <label htmlFor="dateofbirth">Date of Birth</label>
+                        <input type="text" className="form-control" name="dateofbirth" value={user.dateofbirth} onChange={this.handleChange} />
+                        {submitted && !user.dateofbirth &&
+                            <div className="help-block">Date of Birth is required</div>
                         }
                     </div>
                     <div className={'form-group' + (submitted && !user.emailid ? ' has-error' : '')}>
@@ -78,10 +93,10 @@ class RegisterPage extends React.Component {
                             <div className="help-block">Email id is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.mobileno ? ' has-error' : '')}>
-                        <label htmlFor="mobileno">Mobile Number</label>
-                        <input type="number" className="form-control" name="mobileno" value={user.mobileno} onChange={this.handleChange} />
-                        {submitted && !user.mobileno &&
+                    <div className={'form-group' + (submitted && !user.mobilenumber ? ' has-error' : '')}>
+                        <label htmlFor="mobilenumber">Mobile Number</label>
+                        <input type="number" className="form-control" name="mobilenumber" value={user.mobilenumber} onChange={this.handleChange} />
+                        {submitted && !user.mobilenumber &&
                             <div className="help-block">Mobile number is required</div>
                         }
                     </div>
@@ -92,19 +107,19 @@ class RegisterPage extends React.Component {
                             <div className="help-block">Password is required</div>
                         }
                     </div>
-                    <div className={'form-group' + (submitted && !user.resume ? ' has-error' : '')}>
-                        <label htmlFor="resume">Resume upload</label>
-                        <input type="file" className="form-control" name="resume" value={user.resume} onChange={this.handleChange} />
-                        {submitted && !user.resume &&
+                    <div className={'form-group' + (submitted && !user.uploadresume ? ' has-error' : '')}>
+                        <label htmlFor="uploadresume">Resume upload</label>
+                        <input type="file" className="form-control" name="uploadresume" value={user.uploadresume} onChange={this.handleChange} />
+                        {submitted && !user.uploadresume &&
                             <div className="help-block">Please upload Resume</div>
                         }
                     </div>
+                    
                     <div className="form-group">
                         <button className="btn btn-primary">Register</button>  
                     </div>
                     <div>
-                    Already a user? Please click here to login
-                    <Link to="/login" className="btn btn-link">Login</Link>
+                    Already a user? Please click here to  <Link to="/login" className=" btn-link"><b>Login</b></Link>
                     </div>
                 </form>
             </div>

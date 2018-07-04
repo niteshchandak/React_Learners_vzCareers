@@ -64,36 +64,30 @@ Experience working with Linux OS (Red hat / Ubuntu ) is preferred.
           <div className="text-center bs-wizard-stepnum">Step 1</div>
           <div className="progress"><div className="progress-bar"></div></div>
           <span  className="bs-wizard-dot"></span>
-          <div className="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div>
+          <div className="bs-wizard-info text-center">Sucessfully Applied!</div>
         </div>
         
         <div className="col-xs-3 bs-wizard-step disabled">
           <div className="text-center bs-wizard-stepnum">Step 2</div>
           <div className="progress"><div className="progress-bar"></div></div>
           <span className="bs-wizard-dot"></span>
-          <div className="bs-wizard-info text-center">Nam mollis tristique erat vel tristique. Aliquam erat volutpat. Mauris et vestibulum nisi. Duis molestie nisl sed scelerisque vestibulum. Nam placerat tristique placerat</div>
+          <div className="bs-wizard-info text-center">Interview Scheduled</div>
         </div>
         
         <div className="col-xs-3 bs-wizard-step disabled">
           <div className="text-center bs-wizard-stepnum">Step 3</div>
           <div className="progress"><div className="progress-bar"></div></div>
           <span className="bs-wizard-dot"></span>
-          <div className="bs-wizard-info text-center">Integer semper dolor ac auctor rutrum. Duis porta ipsum vitae mi bibendum bibendum</div>
+          <div className="bs-wizard-info text-center">Interviewer Feedback</div>
         </div>
         
         <div className="col-xs-3 bs-wizard-step disabled">
           <div className="text-center bs-wizard-stepnum">Step 4</div>
           <div className="progress"><div className="progress-bar"></div></div>
           <span className="bs-wizard-dot"></span>
-          <div className="bs-wizard-info text-center"> Curabitur mollis magna at blandit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</div>
+          <div className="bs-wizard-info text-center">HR Discussion</div>
         </div>
     </div>
-
-
-
-
-
-
                         </div>
                     </div>
                  </div>
@@ -105,7 +99,7 @@ Experience working with Linux OS (Red hat / Ubuntu ) is preferred.
           }.bind(this)
           )}
 {this.state.isLastindex?<div className={"col-md-12 "}>
-                   <div className="panel panel-default panelDetail">
+          <div className="panel panel-default panelDetail">
                         <div className="panel-body">
                         <h3><b> What we’re looking for...</b></h3>
 
@@ -121,38 +115,32 @@ Experience working with Linux OS (Red hat / Ubuntu ) is preferred.
           <div className="text-center bs-wizard-stepnum">Step 1</div>
           <div className="progress"><div className="progress-bar"></div></div>
           <span  className="bs-wizard-dot"></span>
-          <div className="bs-wizard-info text-center">Lorem ipsum dolor sit amet.</div>
+          <div className="bs-wizard-info text-center">Sucessfully Applied!</div>
         </div>
         
         <div className="col-xs-3 bs-wizard-step disabled">
           <div className="text-center bs-wizard-stepnum">Step 2</div>
           <div className="progress"><div className="progress-bar"></div></div>
           <span className="bs-wizard-dot"></span>
-          <div className="bs-wizard-info text-center">Nam mollis tristique erat vel tristique. Aliquam erat volutpat. Mauris et vestibulum nisi. Duis molestie nisl sed scelerisque vestibulum. Nam placerat tristique placerat</div>
+          <div className="bs-wizard-info text-center">Interview Scheduled</div>
         </div>
         
         <div className="col-xs-3 bs-wizard-step disabled">
           <div className="text-center bs-wizard-stepnum">Step 3</div>
           <div className="progress"><div className="progress-bar"></div></div>
           <span className="bs-wizard-dot"></span>
-          <div className="bs-wizard-info text-center">Integer semper dolor ac auctor rutrum. Duis porta ipsum vitae mi bibendum bibendum</div>
+          <div className="bs-wizard-info text-center">Interviewer Feedback</div>
         </div>
         
         <div className="col-xs-3 bs-wizard-step disabled">
           <div className="text-center bs-wizard-stepnum">Step 4</div>
           <div className="progress"><div className="progress-bar"></div></div>
           <span className="bs-wizard-dot"></span>
-          <div className="bs-wizard-info text-center"> Curabitur mollis magna at blandit vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae</div>
+          <div className="bs-wizard-info text-center">HR Discussion</div>
         </div>
     </div>
-
-
-
-
-
-
                         </div>
-                    </div>
+                    </div>         
 
 </div>:""}
         </div>

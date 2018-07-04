@@ -1,56 +1,87 @@
 import React, { Component } from 'react';
-import axios from 'axios';
-
 
 class CardPanel extends Component {
+
   state = {
-    persons: []
+    indexOpen: -1,
+    isLastindex:false,
+    data: [{ designation: "Analyst", Experience: "2-4", location: "Chennai", "skills": "HTML5,css3,React", postedDate: "06/24/2018" },
+    { designation: "Specialist", Experience: "4-6", location: "Hyderabad", "skills": "HTML5,css3,React", postedDate: "06/24/2018" },
+    { designation: "Tech Lead", Experience: "6+", location: "Chennai", "skills": "HTML5,css3,React", postedDate: "06/24/2018" },
+    { designation: "Tech Arch", Experience: "10+", location: "Bengaluru", "skills": "Mangerial skiils,React", postedDate: "06/24/2018" },
+    {},
+    { designation: "Tech Arch", Experience: "12+", location: "Bengaluru", "skills": "Mangerial skiils,React", postedDate: "06/24/2018" }]
+
   }
-  componentWillMount() {
-    axios.get(`http://10.74.19.207:9004/careers/currentOpenings`)
-      .then(res => {
-        console.log(res+"tesxt");
-        const persons = res.data;
-        this.setState({ persons });
-      })
-  }
-    render() {
-      console.log(this.state);
-      const numbers = this.state;
-    var arr = [];
-    Object.keys(numbers).forEach(function(key) {
-      arr.push(numbers[key]);
-    });                 
-    return (
-      <div className="container-fluid margin-top-xl jobsearchBox">
-      <div className="row">
-      {arr.map(item => <MyAppChild designation={item.designation} Experience={item.Experience} location={item.job_location} skills={item.technologies}  postedDate={item.posting_date}/>)}
-      </div>
-      </div>);
+
+  setIndexOpen = (indexOpen) => {
+    let isLastindex = false;
+    while (indexOpen == 0 || indexOpen % 4 != 0 && !isLastindex) {
+      if (indexOpen + 1 >= this.state.data.length) {
+        isLastindex = true;
+      }
+      indexOpen++;
     }
+    if (isLastindex){
+      this.setState({ isLastindex: true,indexOpen:-1 })
+    return;}
+    this.setState({ indexOpen: indexOpen,isLastindex:false });
+    
+  }
+  render() {
+    var arr = [];
+    Object.keys(this.state.data).forEach(function (key) {
+      arr.push(this.state.data[key]);
+    }.bind(this));
+
+    return (
+      <div className="container margin-top-xl jobsearchBox">
+        <div className="row">
+          {arr.map(function (item, i) {
+            if (i == 0 || i % 4 != 0)
+              return <MyAppChild designation={item.designation} Experience={item.Experience} index={i}
+                location={item.location} setIndexOpen={this.setIndexOpen} skills={item.skills} postedDate={item.postedDate} />;
+
+            else {
+              let hideclassName = "";
+              if (this.state.indexOpen === i) {
+                 return <div className={"col-md-12 " + hideclassName}>2</div>
+              }else{
+                return null;
+              }
+
+            }
+          }.bind(this)
+          )}
+{this.state.isLastindex?<div className={"col-md-12 "}>2</div>:""}
+        </div>
+      </div>);
+  }
 }
 
 class MyAppChild extends React.Component {
   render() {
     return (
-      <div className="col-md-2">
-            <div class="panel panel-default panel-info">
-              <div class="panel-heading">
-                <h3 class="panel-title"><b>{this.props.designation}</b></h3>
-              </div>
-              <div class="panel-body">
-                <p><b>Verizon Data Service</b></p>
-                <ul>
-                  <li><span class="glyphicon glyphicon-briefcase"></span> {this.props.Experience}</li>
-                  <li><span class="glyphicon glyphicon-pushpin"></span> {this.props.location}</li>
-                </ul>
-                <p>Key Skills: <i>{this.props.skills}</i></p>
-              </div>
-              <div class="panel-footer">
-              <span>Posted: {this.props.postedDate} </span>
-              </div>
-            </div>
+      <div className="col-md-3" onClick={() => { this.props.setIndexOpen(this.props.index) }}>
+        <div class="panel panel-default panel-info">
+          <div class="panel-heading">
+            <h3 class="panel-title"><b>{this.props.designation}</b></h3>
           </div>
+          <div class="panel-body">
+            <p><b>Verizon Data Service</b></p>
+            <ul>
+              <li><span class="glyphicon glyphicon-briefcase"></span> {this.props.Experience}</li>
+              <li><span class="glyphicon glyphicon-pushpin"></span> {this.props.location}</li>
+            </ul>
+            <p>Key Skills: <i>{this.props.skills}</i></p>
+          </div>
+          <div class="panel-footer">
+            <span>Posted: {this.props.postedDate} </span>
+          </div>
+        </div>
+
+      </div>
+
     );
   }
 }
